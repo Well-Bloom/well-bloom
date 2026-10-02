@@ -405,6 +405,86 @@ footer {
 
 }
 
+/* =========================================================
+   WHATSAPP CHAT
+   ========================================================= */
+
+.whatsapp-wrapper {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 9998;
+}
+
+.whatsapp-button {
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.2);
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.05);
+}
+
+.whatsapp-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 70px;
+  width: 290px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+}
+
+.whatsapp-menu-title {
+  font-family: Georgia, serif;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.whatsapp-menu-subtitle {
+  margin-top: 4px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.whatsapp-option {
+  display: block;
+  padding: 13px;
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--cream);
+}
+
+.whatsapp-option:hover {
+  border-color: #25D366;
+}
+
+.whatsapp-option strong {
+  display: block;
+  font-size: 14px;
+}
+
+.whatsapp-option span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
 </style>
 </head>
 
@@ -1223,7 +1303,76 @@ function closeReceipt() {
 
 updateTotal();
 
+/* =========================================================
+   WHATSAPP MENU
+   ========================================================= */
+
+function toggleWhatsAppMenu() {
+
+  const menu =
+    document.getElementById("whatsappMenu");
+
+  if (menu.style.display === "block") {
+
+    menu.style.display = "none";
+
+  } else {
+
+    menu.style.display = "block";
+
+  }
+
+}
+
 </script>
+
+<!-- WHATSAPP CHAT -->
+
+<div class="whatsapp-wrapper">
+
+  <button
+    type="button"
+    class="whatsapp-button"
+    onclick="toggleWhatsAppMenu()"
+    aria-label="Chat with Well Bloom"
+  >
+    💬
+  </button>
+
+  <div
+    id="whatsappMenu"
+    class="whatsapp-menu"
+  >
+
+    <div class="whatsapp-menu-title">
+      Chat with Well Bloom
+    </div>
+
+    <div class="whatsapp-menu-subtitle">
+      How can we help you?
+    </div>
+
+    <a
+      href="https://wa.me/2348103658369?text=Hello%20Well%20Bloom%2C%20I%20just%20placed%20an%20order.%20Please%20help%20me%20confirm%20my%20order."
+      target="_blank"
+      class="whatsapp-option"
+    >
+      <strong>🛍️ Orders & Payment</strong>
+      <span>Order confirmation and payment</span>
+    </a>
+
+    <a
+      href="https://wa.me/2348120079729?text=Hello%20Well%20Bloom%2C%20I%20need%20some%20help%20with%20my%20order."
+      target="_blank"
+      class="whatsapp-option"
+    >
+      <strong>💬 Customer Support</strong>
+      <span>Questions and other enquiries</span>
+    </a>
+
+  </div>
+
+</div>
 
 </body>
 </html>
