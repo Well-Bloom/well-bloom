@@ -156,13 +156,19 @@ h2 {
 }
 
 .bottle {
-  height: 170px;
+  height: 250px;
   border-radius: 18px;
-  background: linear-gradient(145deg,#ebdcb9,var(--gold));
+  overflow: hidden;
+  background: #f5efe4;
   display: grid;
   place-items: center;
-  font: 700 22px Georgia;
-  color: #fff;
+}
+
+.bottle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .card h3 {
@@ -586,8 +592,11 @@ footer {
     <article class="card">
 
       <div class="bottle">
-        Well Bloom
-      </div>
+  <img
+    src="images/Hair_oil_50ml.jpeg"
+    alt="Well Bloom Ayurvedic Hair Oil 50ml"
+  >
+</div>
 
       <h3>
         Ayurvedic Hair Oil — 50ml
@@ -607,8 +616,11 @@ footer {
     <article class="card">
 
       <div class="bottle">
-        Well Bloom
-      </div>
+  <img
+    src="images/Hair_oil_100ml.jpeg"
+    alt="Well Bloom Ayurvedic Hair Oil 100ml"
+  >
+</div>
 
       <h3>
         Ayurvedic Hair Oil — 100ml
@@ -628,8 +640,10 @@ footer {
     <article class="card">
 
       <div class="bottle">
-        Well Bloom
-      </div>
+  <span style="font:700 22px Georgia,serif;color:var(--gold);">
+    Coming Soon
+  </span>
+</div>
 
       <h3>
         Leave-in Conditioner — 250ml
