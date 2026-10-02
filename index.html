@@ -1,0 +1,1230 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Well Bloom — Order Online</title>
+
+<style>
+:root {
+  --gold: #bca06a;
+  --gold-hover: #9e8453;
+  --cream: #faf7f2;
+  --card: #ffffff;
+  --ink: #111111;
+  --text-muted: #444444;
+  --line: #eae3d8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+header {
+  padding: 22px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.tag {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.hero {
+  padding: 70px 7% 55px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+h1 {
+  font: 700 clamp(42px, 7vw, 76px)/.98 Georgia, serif;
+  max-width: 800px;
+  margin: 14px 0;
+  color: var(--ink);
+}
+
+.hero p {
+  max-width: 620px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.btn {
+  display: inline-block;
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 22px;
+  background: var(--gold);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+  text-align: center;
+}
+
+.btn:hover {
+  background: var(--gold-hover);
+}
+
+.btn:disabled {
+  background: #dcd5c9;
+  cursor: not-allowed;
+}
+
+section {
+  padding: 30px 7% 70px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  font: 700 36px Georgia, serif;
+  color: var(--ink);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(188,160,106,0.04);
+}
+
+.bottle {
+  height: 170px;
+  border-radius: 18px;
+  background: linear-gradient(145deg,#ebdcb9,var(--gold));
+  display: grid;
+  place-items: center;
+  font: 700 22px Georgia;
+  color: #fff;
+}
+
+.card h3 {
+  font: 700 22px Georgia, serif;
+  margin: 14px 0 6px;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.order {
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 40px 7%;
+  box-shadow: 0 -4px 20px rgba(188,160,106,0.03);
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 820px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  margin-top: 7px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--cream);
+  font: inherit;
+  color: var(--ink);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: #fff;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.full {
+  grid-column: 1/-1;
+}
+
+.summary {
+  background: #f5efe4;
+  border-radius: 16px;
+  padding: 18px;
+  margin-top: 10px;
+}
+
+.total {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+footer {
+  padding: 35px 7%;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Receipt */
+
+.receipt-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.receipt-box {
+  background: var(--card);
+  max-width: 440px;
+  width: 100%;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border: 1px solid var(--line);
+  border-top: 8px solid var(--gold);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.receipt-header {
+  text-align: center;
+  font-family: Georgia, serif;
+  margin-bottom: 20px;
+}
+
+.receipt-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 8px;
+}
+
+.receipt-row span:last-child {
+  text-align: right;
+}
+
+.receipt-row.bill {
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--gold);
+  border-bottom: none;
+  margin-top: 15px;
+}
+
+.success-message {
+  text-align: center;
+  color: #26734d;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.error-message {
+  display: none;
+  background: #fff1f1;
+  color: #a33;
+  border: 1px solid #e6bcbc;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+@media(max-width:760px) {
+
+  .products,
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  .hero {
+    padding-top: 45px;
+  }
+
+  .order {
+    padding: 30px 20px;
+  }
+
+  header {
+    padding: 18px 5%;
+  }
+
+  .tag {
+    font-size: 11px;
+  }
+
+  .receipt-row {
+    font-size: 13px;
+  }
+  
+  .product-selector {
+  margin-top: 10px;
+  display: grid;
+  gap: 12px;
+}
+
+.product-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--cream);
+}
+
+.product-option strong {
+  display: block;
+  font-size: 15px;
+}
+
+.product-option small {
+  display: block;
+  margin-top: 4px;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.product-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-check {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--gold);
+}
+
+.product-qty {
+  width: 75px;
+  margin: 0;
+  padding: 9px;
+}
+
+.order-items {
+  margin-top: 15px;
+  display: grid;
+  gap: 8px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+@media(max-width:760px) {
+
+  .product-option {
+    align-items: flex-start;
+  }
+
+  .product-controls {
+    flex-shrink: 0;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Well Bloom</div>
+  <div class="tag">Ayurvedic Hair Care</div>
+</header>
+
+<main>
+
+<section class="hero">
+
+  <div class="eyebrow">
+    Rooted in care • Made for your routine
+  </div>
+
+  <h1>
+    Healthy hair starts with a thoughtful routine.
+  </h1>
+
+  <p>
+    Discover Well Bloom's Ayurvedic hair-care essentials,
+    created to make scalp and hair care simple, consistent
+    and nourishing.
+  </p>
+
+  <a class="btn" href="#order">
+    Place an Order
+  </a>
+
+</section>
+
+
+<section>
+
+  <div class="eyebrow">
+    The collection
+  </div>
+
+  <h2>
+    Shop Well Bloom
+  </h2>
+
+  <div class="products">
+
+    <article class="card">
+
+      <div class="bottle">
+        Well Bloom
+      </div>
+
+      <h3>
+        Ayurvedic Hair Oil — 50ml
+      </h3>
+
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.5;">
+        A compact everyday scalp-care option.
+      </p>
+
+      <div class="price">
+        ₦3,000
+      </div>
+
+    </article>
+
+
+    <article class="card">
+
+      <div class="bottle">
+        Well Bloom
+      </div>
+
+      <h3>
+        Ayurvedic Hair Oil — 100ml
+      </h3>
+
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.5;">
+        Our fuller-size Ayurvedic hair oil.
+      </p>
+
+      <div class="price">
+        ₦5,000
+      </div>
+
+    </article>
+
+
+    <article class="card">
+
+      <div class="bottle">
+        Well Bloom
+      </div>
+
+      <h3>
+        Leave-in Conditioner — 250ml
+      </h3>
+
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.5;">
+        A simple addition to your hair-care routine.
+      </p>
+
+      <div class="price">
+        Coming Soon
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<section id="order" class="order">
+
+  <div class="eyebrow">
+    Order online
+  </div>
+
+  <h2>
+    Tell us what you need.
+  </h2>
+
+  <div id="errorMessage" class="error-message"></div>
+
+  <form id="orderForm">
+
+    <div>
+      <label>
+        Full name
+        <input required id="name" type="text" autocomplete="name">
+      </label>
+    </div>
+
+
+    <div>
+      <label>
+        WhatsApp / phone
+        <input required id="phone" type="tel" autocomplete="tel">
+      </label>
+    </div>
+
+
+    <div>
+      <label>
+        Email
+        <input required id="email" type="email" autocomplete="email">
+      </label>
+    </div>
+
+
+<div class="full">
+
+  <label>Select your products</label>
+
+  <div class="product-selector">
+
+    <div class="product-option">
+
+      <div>
+        <strong>Ayurvedic Hair Oil — 50ml</strong>
+        <small>₦3,000</small>
+      </div>
+
+      <div class="product-controls">
+        <input
+          type="checkbox"
+          class="product-check"
+          data-product="oil50"
+        >
+
+        <input
+          type="number"
+          class="product-qty"
+          data-product="oil50"
+          min="1"
+          value="1"
+          disabled
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="product-option">
+
+      <div>
+        <strong>Ayurvedic Hair Oil — 100ml</strong>
+        <small>₦5,000</small>
+      </div>
+
+      <div class="product-controls">
+
+        <input
+          type="checkbox"
+          class="product-check"
+          data-product="oil100"
+        >
+
+        <input
+          type="number"
+          class="product-qty"
+          data-product="oil100"
+          min="1"
+          value="1"
+          disabled
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+    <div>
+      <label>
+        Delivery location
+
+        <input
+          required
+          id="location"
+          type="text"
+          placeholder="e.g. Lekki, Lagos"
+        >
+
+      </label>
+    </div>
+
+
+    <div class="full">
+
+      <label>
+        Additional note
+
+        <textarea
+          id="note"
+          placeholder="Anything we should know about your order?"
+        ></textarea>
+
+      </label>
+
+    </div>
+
+
+    <div class="full summary">
+
+  <div>
+    <strong>Order Summary</strong>
+  </div>
+
+  <div id="orderItems" class="order-items">
+    <div style="color:var(--text-muted);font-size:14px;">
+      Select one or more products above.
+    </div>
+  </div>
+
+  <div style="margin-top:18px;">
+    Order total
+  </div>
+
+  <div class="total" id="total">
+    ₦0
+  </div>
+
+  <small style="color:var(--text-muted)">
+    Delivery can be confirmed separately for now.
+  </small>
+
+</div>
+
+
+    <div class="full">
+
+      <button
+        class="btn"
+        id="submitBtn"
+        type="submit"
+        style="width:100%;"
+      >
+        Submit Order
+      </button>
+
+    </div>
+
+  </form>
+
+</section>
+
+</main>
+
+
+<!-- RECEIPT -->
+
+<div
+  class="receipt-backdrop"
+  id="receiptBackdrop"
+>
+
+  <div class="receipt-box">
+
+    <div class="receipt-header">
+
+      <div class="receipt-title">
+        Thank You
+      </div>
+
+      <p style="font-size:13px;color:var(--text-muted);margin:5px 0;">
+        Well Bloom Ayurvedic Hair Care
+      </p>
+
+    </div>
+
+
+    <p style="text-align:center;font-size:14px;margin-bottom:20px;">
+
+      You just made our day — thank you!
+      We hope your order makes your day too.
+
+    </p>
+
+
+    <div class="receipt-row">
+      <span>Order ID:</span>
+      <span style="font-weight:bold;" id="rcptId"></span>
+    </div>
+
+
+    <div class="receipt-row">
+      <span>Customer:</span>
+      <span id="rcptName"></span>
+    </div>
+
+
+    <div class="receipt-row">
+      <span>Product:</span>
+      <span id="rcptProduct"></span>
+    </div>
+
+
+    <div class="receipt-row">
+      <span>Quantity:</span>
+      <span id="rcptQty"></span>
+    </div>
+
+
+    <div class="receipt-row">
+      <span>Destination:</span>
+      <span id="rcptLoc"></span>
+    </div>
+
+
+    <div class="receipt-row bill">
+      <span>Total Value:</span>
+      <span id="rcptTotal"></span>
+    </div>
+
+
+    <div class="success-message">
+      Your order has been submitted successfully.
+    </div>
+
+
+    <button
+      class="btn"
+      style="margin-top:25px;width:100%;"
+      onclick="closeReceipt()"
+    >
+      Close Receipt
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+  © Well Bloom • Ayurvedic Hair Care
+</footer>
+
+
+<script>
+
+/* =========================================================
+   WELL BLOOM PRODUCT CATALOG
+   ========================================================= */
+
+const products = {
+
+  oil50: {
+    name: "Ayurvedic Hair Oil — 50ml",
+    price: 3000
+  },
+
+  oil100: {
+    name: "Ayurvedic Hair Oil — 100ml",
+    price: 5000
+  }
+/* ,
+
+  conditioner250: {
+    name: "Leave-in Conditioner — 250ml",
+    price: 1000
+  } */
+
+};
+
+
+/* =========================================================
+   GOOGLE APPS SCRIPT WEB APP
+   ========================================================= */
+
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbyQWE3vJ441yedHfrDAb44jeTf08DCx1edJWl4b0JXofxMOK6uNoYd-9rulknQlqOd1/exec";
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+const naira = number =>
+  "₦" + Number(number).toLocaleString("en-NG");
+
+
+const totalDisplay =
+  document.getElementById("total");
+
+const orderItemsDisplay =
+  document.getElementById("orderItems");
+
+const productChecks =
+  document.querySelectorAll(".product-check");
+
+const productQuantities =
+  document.querySelectorAll(".product-qty");
+
+/* =========================================================
+   UPDATE ORDER TOTAL
+   ========================================================= */
+
+function getSelectedProducts() {
+
+  const selectedProducts = [];
+
+  productChecks.forEach(check => {
+
+    if (!check.checked) return;
+
+    const key = check.dataset.product;
+
+    const quantityInput =
+      document.querySelector(
+        `.product-qty[data-product="${key}"]`
+      );
+
+    const quantity =
+      Math.max(
+        1,
+        Number(quantityInput.value) || 1
+      );
+
+    const product =
+      products[key];
+
+    if (!product) return;
+
+    selectedProducts.push({
+      key: key,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+      subtotal: product.price * quantity
+    });
+
+  });
+
+  return selectedProducts;
+}
+
+
+function updateTotal() {
+
+  const selectedProducts =
+    getSelectedProducts();
+
+  let total = 0;
+
+  if (selectedProducts.length === 0) {
+
+    orderItemsDisplay.innerHTML = `
+      <div style="color:var(--text-muted);font-size:14px;">
+        Select one or more products above.
+      </div>
+    `;
+
+  } else {
+
+    orderItemsDisplay.innerHTML =
+      selectedProducts.map(item => `
+
+        <div class="order-item">
+
+          <span>
+            ${item.name} × ${item.quantity}
+          </span>
+
+          <strong>
+            ${naira(item.subtotal)}
+          </strong>
+
+        </div>
+
+      `).join("");
+
+    total =
+      selectedProducts.reduce(
+        (sum, item) => sum + item.subtotal,
+        0
+      );
+
+  }
+
+  totalDisplay.textContent =
+    naira(total);
+}
+
+productChecks.forEach(check => {
+
+  check.addEventListener("change", function() {
+
+    const key = this.dataset.product;
+
+    const quantityInput =
+      document.querySelector(
+        `.product-qty[data-product="${key}"]`
+      );
+
+    quantityInput.disabled =
+      !this.checked;
+
+    updateTotal();
+
+  });
+
+});
+
+
+productQuantities.forEach(input => {
+
+  input.addEventListener(
+    "input",
+    updateTotal
+  );
+
+});
+
+/* =========================================================
+   GENERATE ORDER ID
+   ========================================================= */
+
+function generateOrderId() {
+
+  const randomNumber =
+    Math.floor(
+      100000 +
+      Math.random() * 900000
+    );
+
+  return "WB-" + randomNumber;
+}
+
+
+/* =========================================================
+   SHOW ERROR
+   ========================================================= */
+
+function showError(message) {
+
+  const error =
+    document.getElementById("errorMessage");
+
+  error.textContent = message;
+
+  error.style.display = "block";
+
+  error.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+
+/* =========================================================
+   CLEAR ERROR
+   ========================================================= */
+
+function clearError() {
+
+  const error =
+    document.getElementById("errorMessage");
+
+  error.style.display = "none";
+
+  error.textContent = "";
+}
+
+
+/* =========================================================
+   SUBMIT ORDER
+   ========================================================= */
+
+document
+  .getElementById("orderForm")
+  .addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    clearError();
+
+    const submitButton =
+      document.getElementById("submitBtn");
+
+    submitButton.disabled = true;
+
+    submitButton.innerText =
+      "Submitting Order...";
+
+
+    try {
+
+      const selectedProducts =
+  getSelectedProducts();
+
+if (selectedProducts.length === 0) {
+  throw new Error(
+    "Please select at least one product."
+  );
+}
+
+const orderId =
+  generateOrderId();
+
+
+
+      const order = {
+
+  id: orderId,
+
+  name:
+    document.getElementById("name").value.trim(),
+
+  phone:
+    document.getElementById("phone").value.trim(),
+
+  email:
+    document.getElementById("email").value.trim(),
+
+  items:
+    selectedProducts.map(item => ({
+
+      name:
+        item.name,
+
+      quantity:
+        item.quantity,
+
+      unitPrice:
+        item.price
+
+    })),
+
+  location:
+    document.getElementById("location").value.trim(),
+
+  note:
+    document.getElementById("note").value.trim(),
+
+  createdAt:
+    new Date().toISOString()
+
+};
+
+
+      /*
+       * text/plain is intentional.
+       * It prevents the browser from making a
+       * CORS preflight request to Google Apps Script.
+       */
+
+      await fetch(
+        WEB_APP_URL,
+        {
+          method: "POST",
+
+          mode: "no-cors",
+
+          headers: {
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(order)
+        }
+      );
+
+
+      /*
+       * Google Apps Script may return an opaque
+       * response because of no-cors.
+       *
+       * If the request reaches the Apps Script,
+       * the order will be saved to Google Sheets.
+       */
+
+      document.getElementById("rcptId")
+        .textContent = order.id;
+
+      document.getElementById("rcptName")
+        .textContent = order.name;
+
+     document.getElementById("rcptProduct")
+     .textContent =
+     selectedProducts
+      .map(item =>
+        `${item.name} × ${item.quantity}`
+      )
+      .join(", ");
+
+      document.getElementById("rcptQty")
+  .textContent =
+    selectedProducts
+      .reduce(
+        (sum, item) => sum + item.quantity,
+        0
+      );
+
+const orderTotal =
+  selectedProducts.reduce(
+    (sum, item) => sum + item.subtotal,
+    0
+  );
+
+      document.getElementById("rcptLoc")
+        .textContent = order.location;
+
+      document.getElementById("rcptTotal")
+  .textContent =
+    naira(orderTotal);
+
+
+      document.getElementById("receiptBackdrop")
+        .style.display = "flex";
+
+
+      /*
+       * Reset form after successful submission.
+       */
+
+      document
+        .getElementById("orderForm")
+        .reset();
+
+      productQuantities.forEach(input => {
+  input.disabled = true;
+});
+
+      updateTotal();
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Order submission error:",
+        error
+      );
+
+      showError(
+        "We could not submit your order. Please check your internet connection and try again."
+      );
+
+    }
+
+    finally {
+
+      submitButton.disabled = false;
+
+      submitButton.innerText =
+        "Submit Order";
+
+    }
+
+  });
+
+
+/* =========================================================
+   CLOSE RECEIPT
+   ========================================================= */
+
+function closeReceipt() {
+
+  document.getElementById("receiptBackdrop")
+    .style.display = "none";
+
+}
+
+
+/* =========================================================
+   INITIAL TOTAL
+   ========================================================= */
+
+updateTotal();
+
+</script>
+
+</body>
+</html>
+
